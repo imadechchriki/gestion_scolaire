@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Élèves</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <div class="container">
+            <h1>👨‍🎓 Gestion des Élèves</h1>
+            <p class="mb-0">Liste et gestion de tous les élèves</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Filtre filière si applicable -->
+        <div th:if="${filiere != null}" class="alert alert-info mb-4">
+            <h5>📚 Filière : <span th:text="${filiere.nom}">Nom</span> (<span th:text="${filiere.code}">Code</span>)</h5>
+            <p class="mb-0">Nombre d'élèves : <span class="badge bg-primary" th:text="${eleves.size()}">0</span></p>
+        </div>
+
+        <!-- Actions -->
+        <div class="mb-3">
+            <a href="/views/eleves/add" class="btn btn-success">➕ Ajouter un Élève</a>
+            <a href="/" class="btn btn-secondary">🏠 Accueil</a>
+            <a href="/views/filieres" class="btn btn-info">📚 Filières</a>
+        </div>
+
+        <!-- Table -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Filière</th>
+                            <th>N° Inscription</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="eleve : ${eleves}">
+                            <td th:text="${eleve.id}"></td>
+                            <td th:text="${eleve.nom}"></td>
+                            <td th:text="${eleve.prenom}"></td>
+                            <td>
+                                <span th:if="${eleve.filiere != null}" 
+                                      class="badge bg-info" 
+                                      th:text="${eleve.filiere.code}">CODE</span>
+                                <span th:if="${eleve.filiere == null}" 
+                                      class="badge bg-secondary">Aucune</span>
+                            </td>
+                            <td>
+                                <span th:if="${eleve.dossierAdministratif != null}" 
+                                      th:text="${eleve.dossierAdministratif.numeroInscription}">NUM</span>
+                            </td>
+                            <td>
+                                <a th:href="@{/views/eleves/details/{id}(id=${eleve.id})}" 
+                                   class="btn btn-sm btn-info">👁️ Détails</a>
+                                <a th:href="@{/views/eleves/edit/{id}(id=${eleve.id})}" 
+                                   class="btn btn-sm btn-warning">✏️ Modifier</a>
+                                <a th:href="@{/views/eleves/delete/{id}(id=${eleve.id})}" 
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Êtes-vous sûr ?')">🗑️ Supprimer</a>
+                            </td>
+                        </tr>
+                        <tr th:if="${eleves.empty}">
+                            <td colspan="6" class="text-center text-muted">Aucun élève trouvé</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

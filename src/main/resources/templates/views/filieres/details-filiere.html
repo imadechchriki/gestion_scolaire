@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détails Filière</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h1 class="mb-4">📚 Détails de la Filière</h1>
+    
+    <!-- Informations générales -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4>Informations Générales</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <p><strong>ID :</strong> <span th:text="${filiere.id}"></span></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Code :</strong> 
+                        <span class="badge bg-primary fs-5" th:text="${filiere.code}"></span>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Nom :</strong> <span th:text="${filiere.nom}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Statistiques -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5>👨‍🎓 Élèves</h5>
+                    <h2 class="text-primary" th:text="${filiere.eleves.size()}">0</h2>
+                    <a th:href="@{/views/eleves/filiere/{id}(id=${filiere.id})}" 
+                       class="btn btn-primary">Voir les élèves</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5>📖 Cours</h5>
+                    <h2 class="text-warning" th:text="${cours.size()}">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Liste des cours -->
+    <div class="card mb-4">
+        <div class="card-header bg-warning">
+            <h4>📖 Cours de la Filière</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped" th:if="${!cours.empty}">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Intitulé</th>
+                        <th>Nb Élèves</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="c : ${cours}">
+                        <td><span class="badge bg-secondary" th:text="${c.code}"></span></td>
+                        <td th:text="${c.intitule}"></td>
+                        <td>
+                            <span class="badge bg-info" 
+                                  th:text="${c.eleves != null ? c.eleves.size() : 0}">0</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div th:if="${cours.empty}" class="alert alert-info">
+                Aucun cours dans cette filière
+            </div>
+        </div>
+    </div>
+    
+    <!-- Actions -->
+    <div class="mb-4">
+        <a th:href="@{/views/filieres/edit/{id}(id=${filiere.id})}" class="btn btn-warning">✏️ Modifier</a>
+        <a href="/views/cours/add" class="btn btn-success">➕ Ajouter un Cours</a>
+        <a href="/views/filieres" class="btn btn-secondary">⬅️ Retour</a>
+    </div>
+</body>
+</html>

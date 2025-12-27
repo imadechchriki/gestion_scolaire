@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestion Scolaire - Accueil</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+        }
+        .card-custom {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .icon-large {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- Hero Section -->
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold">🎓 Gestion Scolaire</h1>
+        <p class="lead">Système de gestion des élèves, filières et cours</p>
+    </div>
+</div>
+
+<!-- Navigation Cards -->
+<div class="container mb-5">
+    <div class="row g-4">
+        <!-- Élèves -->
+        <div class="col-md-4">
+            <div class="card card-custom border-primary">
+                <div class="card-body text-center">
+                    <div class="icon-large text-primary">👨‍🎓</div>
+                    <h3 class="card-title">Élèves</h3>
+                    <p class="card-text">Gérer les élèves, leurs inscriptions et leurs dossiers administratifs</p>
+                    <a href="/views/eleves" class="btn btn-primary">Accéder</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filières -->
+        <div class="col-md-4">
+            <div class="card card-custom border-success">
+                <div class="card-body text-center">
+                    <div class="icon-large text-success">📚</div>
+                    <h3 class="card-title">Filières</h3>
+                    <p class="card-text">Gérer les filières avec leurs élèves et cours associés</p>
+                    <a href="/views/filieres" class="btn btn-success">Accéder</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cours -->
+        <div class="col-md-4">
+            <div class="card card-custom border-warning">
+                <div class="card-body text-center">
+                    <div class="icon-large text-warning">📖</div>
+                    <h3 class="card-title">Cours</h3>
+                    <p class="card-text">Gérer les cours et leur rattachement aux filières</p>
+                    <a href="/views/cours" class="btn btn-warning">Accéder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features -->
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Fonctionnalités</h2>
+    <div class="row">
+        <div class="col-md-3 text-center mb-3">
+            <div class="p-3">
+                <h5>✅ CRUD Complet</h5>
+                <p class="text-muted">Ajouter, modifier, supprimer</p>
+            </div>
+        </div>
+        <div class="col-md-3 text-center mb-3">
+            <div class="p-3">
+                <h5>🔗 Relations</h5>
+                <p class="text-muted">Gestion des associations</p>
+            </div>
+        </div>
+        <div class="col-md-3 text-center mb-3">
+            <div class="p-3">
+                <h5>📋 Dossiers</h5>
+                <p class="text-muted">Création automatique</p>
+            </div>
+        </div>
+        <div class="col-md-3 text-center mb-3">
+            <div class="p-3">
+                <h5>🎯 Inscriptions</h5>
+                <p class="text-muted">Gestion des cours</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

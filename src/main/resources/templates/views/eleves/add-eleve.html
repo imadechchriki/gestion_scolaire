@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ajouter Élève</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h2>➕ Ajouter un Élève</h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/views/eleves/add}" th:object="${eleve}" method="post">
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom *</label>
+                    <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="prenom" class="form-label">Prénom *</label>
+                    <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="filiere" class="form-label">Filière *</label>
+                    <select class="form-select" id="filiere" th:field="*{filiere}" required>
+                        <option value="">Sélectionner une filière</option>
+                        <option th:each="fil : ${filieres}" 
+                                th:value="${fil.id}" 
+                                th:text="${fil.code + ' - ' + fil.nom}"></option>
+                    </select>
+                </div>
+                
+                <div class="alert alert-info">
+                    <strong>ℹ️ Information :</strong> Le dossier administratif sera créé automatiquement avec un numéro d'inscription au format FILIERE-ANNEE-ID.
+                </div>
+                
+                <button type="submit" class="btn btn-success">💾 Enregistrer</button>
+                <a href="/views/eleves" class="btn btn-secondary">❌ Annuler</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

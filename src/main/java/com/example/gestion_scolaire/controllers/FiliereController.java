@@ -23,13 +23,13 @@ public class FiliereController {
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("filieres", filiereService.getAll());
-        return "views/filieres";
+        return "views/filieres/filieres";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("filiere", new Filiere());
-        return "views/add-filiere";
+        return "views/filieres/add-filiere";
     }
 
     @PostMapping("/add")
@@ -56,7 +56,7 @@ public class FiliereController {
                     filiere.getCours() != null ? filiere.getCours().size() : 0);
         }
 
-        return "views/edit-filiere";
+        return "views/filieres/edit-filiere";
     }
 
     @PostMapping("/update")
@@ -70,6 +70,6 @@ public class FiliereController {
         Filiere filiere = filiereService.getById(id);
         model.addAttribute("filiere", filiere);
         model.addAttribute("cours", coursService.getByFiliere(id));
-        return "views/details-filiere";
+        return "views/filieres/details-filiere";
     }
 }

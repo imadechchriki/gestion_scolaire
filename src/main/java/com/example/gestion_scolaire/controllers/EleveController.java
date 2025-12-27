@@ -25,14 +25,14 @@ public class EleveController {
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("eleves", eleveService.getAll());
-        return "views/eleves";
+        return "views/eleves/eleves";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("eleve", new Eleve());
         model.addAttribute("filieres", filiereService.getAll());
-        return "views/add-eleve";
+        return "views/eleves/add-eleve";
     }
 
     @PostMapping("/add")
@@ -51,7 +51,7 @@ public class EleveController {
     public String editForm(@PathVariable Long id, Model model) {
         model.addAttribute("eleve", eleveService.getById(id));
         model.addAttribute("filieres", filiereService.getAll());
-        return "views/edit-eleve";
+        return "views/eleves/edit-eleve";
     }
 
     @PostMapping("/update")
@@ -71,7 +71,7 @@ public class EleveController {
                     coursService.getByFiliere(eleve.getFiliere().getId()));
         }
 
-        return "views/details-eleve";
+        return "views/eleves/details-eleve";
     }
 
     @GetMapping("/inscrire-cours/{eleveId}/{coursId}")
@@ -90,6 +90,6 @@ public class EleveController {
     public String getByFiliere(@PathVariable Long filiereId, Model model) {
         model.addAttribute("eleves", eleveService.getByFiliere(filiereId));
         model.addAttribute("filiere", filiereService.getById(filiereId));
-        return "views/eleves";
+        return "views/eleves/eleves";
     }
 }

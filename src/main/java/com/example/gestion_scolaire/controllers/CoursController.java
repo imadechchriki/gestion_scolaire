@@ -22,14 +22,14 @@ public class CoursController {
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("coursList", coursService.getAll());
-        return "views/cours";
+        return "views/cours/cours";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("cours", new Cours());
         model.addAttribute("filieres", filiereService.getAll());
-        return "views/add-cours";
+        return "views/cours/add-cours";
     }
 
     @PostMapping("/add")
@@ -54,7 +54,7 @@ public class CoursController {
             model.addAttribute("nombreEleves", cours.getEleves().size());
         }
 
-        return "views/edit-cours";
+        return "views/cours/edit-cours";
     }
 
     @PostMapping("/update")
